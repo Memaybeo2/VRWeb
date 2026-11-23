@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">VR Box Web Mirror</string>
+    <string name="url_hint">Nhập địa chỉ web hoặc từ khoá tìm kiếm</string>
+</resources>

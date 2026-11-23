@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Giao diện chính: nền tối, không có thanh tiêu đề -->
+    <style name="Theme.VRBoxWebMirror" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+
+    <!-- Nút trên thanh địa chỉ -->
+    <style name="BarButton" parent="android:Widget.Material.Button">
+        <item name="android:textSize">13sp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Nút trên thanh điều khiển VR (nhỏ gọn để đủ 10 nút) -->
+    <style name="VrButton" parent="android:Widget.Material.Button">
+        <item name="android:textSize">11sp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Nhãn trong màn hình cài đặt -->
+    <style name="SettingLabel">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

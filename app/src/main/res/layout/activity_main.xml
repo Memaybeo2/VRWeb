@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    File: res/layout/activity_main.xml
+    Bố cục màn hình:
+      - urlBar        : thanh địa chỉ (chỉ hiện ở chế độ thường)
+      - leftHalf      : MẮT TRÁI  -> chứa WebView thật, thanh nút VR, con trỏ nhìn
+      - rightHalf     : MẮT PHẢI  -> ảnh sao chép của mắt trái (chỉ hiện ở chế độ VR)
+      - settingsOverlay: màn hình cài đặt phủ lên trên
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Thanh địa chỉ -->
+        <LinearLayout
+            android:id="@+id/urlBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#202124"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <EditText
+                android:id="@+id/urlInput"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:background="#3C4043"
+                android:hint="@string/url_hint"
+                android:imeOptions="actionGo"
+                android:importantForAutofill="no"
+                android:inputType="textUri"
+                android:maxLines="1"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:selectAllOnFocus="true"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#9AA0A6"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/goButton"
+                style="@style/BarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginStart="4dp"
+                android:text="Đi" />
+
+            <Button
+                android:id="@+id/vrButton"
+                style="@style/BarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginStart="4dp"
+                android:text="VR" />
+
+            <Button
+                android:id="@+id/settingsButton"
+                style="@style/BarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginStart="4dp"
+                android:text="Cài đặt" />
+        </LinearLayout>
+
+        <!-- Hai mắt -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!-- MẮT TRÁI -->
+            <FrameLayout
+                android:id="@+id/leftHalf"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <FrameLayout
+                    android:id="@+id/eyeContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF">
+
+                    <WebView
+                        android:id="@+id/webView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_gravity="top"
+                        android:max="100"
+                        android:visibility="gone" />
+
+                    <!-- Thanh nút điều khiển trong chế độ VR -->
+                    <LinearLayout
+                        android:id="@+id/vrBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="#CC202124"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/btnBack"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Lùi" />
+
+                        <Button
+                            android:id="@+id/btnForward"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Tiến" />
+
+                        <Button
+                            android:id="@+id/btnReload"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Tải lại" />
+
+                        <Button
+                            android:id="@+id/btnHome"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Home" />
+
+                        <Button
+                            android:id="@+id/btnZoomOut"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Chữ -" />
+
+                        <Button
+                            android:id="@+id/btnZoomIn"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Chữ +" />
+
+                        <Button
+                            android:id="@+id/btnScrollUp"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Lên" />
+
+                        <Button
+                            android:id="@+id/btnScrollDown"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Xuống" />
+
+                        <Button
+                            android:id="@+id/btnRecenter"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Giữa" />
+
+                        <Button
+                            android:id="@+id/btnExitVr"
+                            style="@style/VrButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:text="Thoát" />
+                    </LinearLayout>
+
+                    <!-- Con trỏ nhìn (nằm trên cùng) -->
+                    <com.vrbox.webmirror.GazeCursorView
+                        android:id="@+id/cursorView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone" />
+                </FrameLayout>
+            </FrameLayout>
+
+            <!-- MẮT PHẢI -->
+            <FrameLayout
+                android:id="@+id/rightHalf"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/mirrorView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#000000"
+                    android:importantForAccessibility="no"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Màn hình cài đặt -->
+    <ScrollView
+        android:id="@+id/settingsOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F2121212"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cài đặt VR Box"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/labelOuter"
+                style="@style/SettingLabel"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/seekOuter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="200" />
+
+            <TextView
+                android:id="@+id/labelInner"
+                style="@style/SettingLabel"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/seekInner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="200" />
+
+            <TextView
+                android:id="@+id/labelVertical"
+                style="@style/SettingLabel"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/seekVertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="150" />
+
+            <TextView
+                android:id="@+id/labelSens"
+                style="@style/SettingLabel"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/seekSens"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100" />
+
+            <TextView
+                android:id="@+id/labelDwell"
+                style="@style/SettingLabel"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/seekDwell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="50" />
+
+            <CheckBox
+                android:id="@+id/checkMouse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Chế độ chuột (tắt cảm biến đầu, nhìn để bấm, cuộn bằng nhìn)"
+                android:textColor="#FFFFFF" />
+
+            <CheckBox
+                android:id="@+id/checkDwell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Tự bấm khi nhìn yên (dwell click)"
+                android:textColor="#FFFFFF" />
+
+            <CheckBox
+                android:id="@+id/checkDesktop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giao diện web máy tính (Desktop)"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/closeSettingsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Xong" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
